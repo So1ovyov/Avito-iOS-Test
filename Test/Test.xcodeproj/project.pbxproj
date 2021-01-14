@@ -14,7 +14,7 @@
 		B2B731B525B0426E00466B4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2B731B325B0426E00466B4D /* LaunchScreen.storyboard */; };
 		B2B731C025B0433E00466B4D /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B731BF25B0433E00466B4D /* PostModel.swift */; };
 		B2B731C625B0492100466B4D /* result.json in Resources */ = {isa = PBXBuildFile; fileRef = B2B731C525B0492100466B4D /* result.json */; };
-		B2B731CA25B049C600466B4D /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B731C925B049C600466B4D /* DataLoader.swift */; };
+		B2B731CA25B049C600466B4D /* JSONFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B731C925B049C600466B4D /* JSONFileParser.swift */; };
 		B2B731D425B060B900466B4D /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B731D325B060B900466B4D /* CustomCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +28,7 @@
 		B2B731B625B0426E00466B4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2B731BF25B0433E00466B4D /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		B2B731C525B0492100466B4D /* result.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = result.json; sourceTree = "<group>"; };
-		B2B731C925B049C600466B4D /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
+		B2B731C925B049C600466B4D /* JSONFileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFileParser.swift; sourceTree = "<group>"; };
 		B2B731D325B060B900466B4D /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,7 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				B2B731BF25B0433E00466B4D /* PostModel.swift */,
-				B2B731C925B049C600466B4D /* DataLoader.swift */,
+				B2B731C925B049C600466B4D /* JSONFileParser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -170,7 +170,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2B731CA25B049C600466B4D /* DataLoader.swift in Sources */,
+				B2B731CA25B049C600466B4D /* JSONFileParser.swift in Sources */,
 				B2B731D425B060B900466B4D /* CustomCollectionViewCell.swift in Sources */,
 				B2B731AD25B0426D00466B4D /* ViewController.swift in Sources */,
 				B2B731C025B0433E00466B4D /* PostModel.swift in Sources */,

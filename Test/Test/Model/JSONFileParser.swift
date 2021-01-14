@@ -1,5 +1,5 @@
 //
-//  DataLoader.swift
+//  JSONFileParser.swift
 //  Test
 //
 //  Created by Максим Соловьёв on 14.01.2021.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class DataLoader {
+public class JSONFileParser {
     
     var welcome: Welcome?
     

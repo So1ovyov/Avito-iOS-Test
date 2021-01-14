@@ -33,6 +33,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         button.backgroundColor = .systemBlue
         button.layer.masksToBounds = true
         button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(didTapPickButton), for: .touchUpInside)
         return button
     }()
     
@@ -48,6 +49,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         setupConstraints()
     }
     
+    @objc func didTapPickButton() {
+        //ПРИ НАЖАТИИ ДОЛЖЕН ПОКАЗАТЬСЯ АЛЕРТ С НАЗВАНИЕМ ВЫБРАННОЙ УСЛУГИ
+        print("ВЫБРАЛ")
+    }
+    
     private func setupCollectionView() {
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -59,15 +65,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         collectionView.delegate = self
         collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.backgroundColor = UIColor.systemGray6
+        collectionView.backgroundColor = .white
         
         self.view.addSubview(collectionView)
     }
     
     private func setupInterface() {
-        let data = DataLoader().welcome
+        let data = JSONFileParser().welcome
         titleLabel.text = data?.result.title
-        
     }
     
     private func setupConstraints() {
@@ -113,13 +118,18 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let data = DataLoader().welcome?.result.list
+        let data = JSONFileParser().welcome?.result.list
         return data?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CustomCollectionViewCell
-        let data = DataLoader().welcome?.result.list
+        let data = JSONFileParser().welcome
+        //cell.imageView.image = UIImage(named: (data!.result.list[indexPath.row].icon.the52X52))
+        cell.titleLabel.text = data!.result.list[indexPath.row].title
+        cell.descriptionLabel.text = data!.result.list[indexPath.row].listDescription
+        cell.priceLabel.text = data!.result.list[indexPath.row].price
+        cell.selectedImageView.isHidden = !data!.result.list[indexPath.row].isSelected
         return cell
     }
     
