@@ -30,7 +30,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 2
         label.textAlignment = .left
-        label.font = UIFont.boldSystemFont(ofSize: 22.0)
+        label.font = UIFont.boldSystemFont(ofSize: 20.0)
         return label
     }()
     
@@ -38,9 +38,9 @@ class CustomCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "Тестовое описание. Здесь описывается услуга и её преимущества. К каждому объявлению своё небольшое описание"
         label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 20
+        label.numberOfLines = 10
         label.textAlignment = .left
-        label.font = UIFont(name: "Avenir-Light", size: 15.0)
+        label.font = UIFont(name: "Avenir-Light", size: 13.0)
         return label
     }()
     
@@ -48,7 +48,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "299 ₽"
         label.textAlignment = .left
-        label.font = UIFont.boldSystemFont(ofSize: 20.0)
+        label.font = UIFont.boldSystemFont(ofSize: 16.0)
         return label
     }()
     
@@ -61,37 +61,30 @@ class CustomCollectionViewCell: UICollectionViewCell {
         return image
     }()
     
+    override var isSelected: Bool {
+        didSet {
+            selectedImageView.isHidden = !isSelected
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         contentView.backgroundColor = .systemGray6
         contentView.layer.masksToBounds = true
-        contentView.layer.cornerRadius = 10
-        
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView))
-        containerView.addGestureRecognizer(tapGestureRecognizer)
+        contentView.layer.cornerRadius = 5
         
         setupConstraints()
     }
-    
-    @objc func didTapView() {
-        //ОДНОВРЕМЕННО ДОЛЖЕН БЫТЬ ОТМЕЧЕН 1 ЭЛЕМЕНТ 
-        if selectedImageView.isHidden == true {
-            selectedImageView.isHidden = false
-        } else {
-            selectedImageView.isHidden = true
-        }
         
-    }
-    
     private func setupConstraints() {
         
         contentView.addSubview(containerView)
-        contentView.addSubview(imageView)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(descriptionLabel)
-        contentView.addSubview(priceLabel)
-        contentView.addSubview(selectedImageView)
+        containerView.addSubview(imageView)
+        containerView.addSubview(titleLabel)
+        containerView.addSubview(descriptionLabel)
+        containerView.addSubview(priceLabel)
+        containerView.addSubview(selectedImageView)
         
         [containerView,
          imageView,
@@ -101,6 +94,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
          selectedImageView].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         
         NSLayoutConstraint.activate([
+            containerView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 30),
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -108,39 +102,36 @@ class CustomCollectionViewCell: UICollectionViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            imageView.heightAnchor.constraint(equalToConstant: 80),
-            imageView.widthAnchor.constraint(equalToConstant: 80),
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32)
+            imageView.heightAnchor.constraint(equalToConstant: 52),
+            imageView.widthAnchor.constraint(equalToConstant: 52),
+            imageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 16),
+            imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16)
         ])
         
         NSLayoutConstraint.activate([
-            selectedImageView.heightAnchor.constraint(equalToConstant: 25),
-            selectedImageView.widthAnchor.constraint(equalToConstant: 25),
+            selectedImageView.heightAnchor.constraint(equalToConstant: 20),
+            selectedImageView.widthAnchor.constraint(equalToConstant: 20),
             selectedImageView.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
-            selectedImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -32)
+            selectedImageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16)
         ])
         
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 8),
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            titleLabel.trailingAnchor.constraint(equalTo: selectedImageView.leadingAnchor, constant: -8),
-            titleLabel.heightAnchor.constraint(equalToConstant: 60)
+            titleLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 16),
+            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: selectedImageView.leadingAnchor, constant: -8)
+        ])
+        
+        NSLayoutConstraint.activate([
+            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+            descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            descriptionLabel.trailingAnchor.constraint(equalTo: selectedImageView.leadingAnchor, constant: -36),
         ])
         
         NSLayoutConstraint.activate([
             priceLabel.leadingAnchor.constraint(equalTo: descriptionLabel.leadingAnchor),
-            priceLabel.heightAnchor.constraint(equalToConstant: 50),
             priceLabel.trailingAnchor.constraint(equalTo: descriptionLabel.trailingAnchor),
-            priceLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 8),
-            priceLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
-        ])
-        
-        NSLayoutConstraint.activate([
-            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
-            descriptionLabel.bottomAnchor.constraint(equalTo: priceLabel.topAnchor),
-            descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            descriptionLabel.trailingAnchor.constraint(equalTo: selectedImageView.leadingAnchor, constant: -8),
+            priceLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
+            priceLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -16)
         ])
         
     }
